@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block body %}
+    <div class="container text-center">
+        <div class="container py-4">
+            <h1>Register</h1>
+        </div>
+        <form action="/register" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.username(autocomplete="off", autofocus="on", class="form-control mx-auto w-auto", placeholder="Username") }}
+                {% for error in form.username.errors %}
+                    <div class="invalid-feedback d-block">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="mb-3">
+                {{ form.password(class="form-control mx-auto w-auto", placeholder="Password") }}
+                {% for error in form.password.errors %}
+                    <div class="invalid-feedback d-block">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="mb-3">
+                {{ form.check(class="form-control mx-auto w-auto", placeholder="Confirm Password") }}
+                {% for error in form.check.errors %}
+                    <div class="invalid-feedback d-block">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+            {{ form.submit(class="btn btn-success") }}
+        </form>
+    </div>
+{% endblock %}

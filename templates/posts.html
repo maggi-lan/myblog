@@ -1,0 +1,48 @@
+<table class="table table-hover" id="posts" valign="top">
+    {% for post in posts %}
+        <tr>
+            <td style="width: 60px;">
+                <img src="{{ post.pfp }}" style="width: 50px; height: 50px;">
+            </td>
+            <td>
+                <p>
+                    <a href="/profile/{{ post.username }}">{{ post.username }}</a>
+                    posted {{ post.post_time }} ago
+                </p>
+                {{ post.content }}
+            </td>  
+            <td style="width: 1%; white-space: nowrap;">
+                {% if post.username == session["username"] %}
+                    <div class="dropdown text-end">
+                        <button class="btn btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-three-dots"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <form method="POST" action="/delete" style="display: inline;">
+                                    <input type="hidden" name="post_id" value="{{ post.id }}">
+                                    <input type="hidden" name="route" value="{{ path }}">
+                                    <button class="dropdown-item text-danger" type="submit">Delete</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
+            </td>  
+        </tr>
+    {% endfor %}
+</table>
+
+<div class="d-flex justify-content-between my-4">
+    {% if page > 1 %}
+        <a class="btn btn-outline-success" href="{{ path }}?page={{ page - 1 }}#posts">Previous</a>
+    {% else %}
+        <span></span>
+    {% endif %}
+
+    {% if total_pages > page %}
+        <a class="btn btn-outline-success" href="{{ path }}?page={{ page + 1 }}#posts">Next</a>
+    {% else %}
+        <span></span>
+    {% endif %}
+</div>

@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search Results
+{% endblock %}
+
+{% block body %}
+    <div class="container py-4">
+        <h2>Search Results</h2>
+
+        <hr>
+
+        <table class="table table-hover" id="users" valign="top">
+            {% for row in rows %}
+                <tr>
+                    <td style="width: 60px;">
+                        <img src="{{ row.pfp }}" style="width: 50px; height: 50px;">
+                    </td>
+                    <td>
+                        <p>
+                            <a href="/profile/{{ row.username }}">{{ row.username }}</a>
+                        </p>
+                        {% if row.name %}
+                            {{ row.name }}
+                        {% endif %}
+                    </td>    
+                </tr>
+            {% endfor %}
+        </table>
+
+        <div class="d-flex justify-content-between my-4">
+            {% if page > 1 %}
+                <a class="btn btn-outline-success" href="/search?q={{ query }}&page={{ page - 1 }}#users">Previous</a>
+            {% else %}
+                <span></span>
+            {% endif %}
+
+            {% if total_pages > page %}
+                <a class="btn btn-outline-success" href="/search?q={{ query }}&page={{ page + 1 }}#users">Next</a>
+            {% else %}
+                <span></span>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,107 @@
+/* Base styling */
+body {
+    background-color: #f3f1e3;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Headings */
+h1, h2, h3 {
+    color: #343a40;
+}
+
+/* Forms */
+.form-label {
+    font-weight: 600;
+}
+
+textarea.form-control {
+    resize: none;
+}
+
+/* Post card-like table rows */
+#posts tr {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: #21252940;
+    transition: background-color 0.2s ease;
+    border-color: #21252940;
+}
+
+#posts tr:hover {
+    background-color: #f1f3f5;
+    border-color: #21252940;
+}
+
+/* Buttons */
+.btn-outline-success {
+    transition: background-color 0.2s ease, color 0.2s ease;
+    --bs-btn-color: #c63728;
+    --bs-btn-border-color: #c63728;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #c63728;
+    --bs-btn-hover-border-color: #c63728;
+    -bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #c63728;
+    --bs-btn-active-border-color: #c63728;
+}
+
+.btn-success {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #c63728;
+    --bs-btn-border-color: #c63728;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #a93124;
+    --bs-btn-hover-border-color: #a93124;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #a93124;
+    --bs-btn-active-border-color: #a93124;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Pagination */
+.d-flex.justify-content-between {
+    gap: 1rem;
+}
+
+/* Muted secondary text */
+.text-muted {
+    color: #6c757d !important;
+}
+
+/* Post content text */
+#posts td {
+    vertical-align: top;
+}
+
+/* Responsive tweaks */
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+
+    #posts td:nth-child(2) {
+        display: block;
+        width: 100%;
+    }
+
+    #posts td:nth-child(3) {
+        text-align: right;
+    }
+}

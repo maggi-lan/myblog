@@ -1,0 +1,138 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {% if details.name == None %}
+        @{{ details.username }}
+    {% else %}
+        {{ details.name }} (@{{ details.username }})
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="container py-4">
+        <div class="row align-items-center mb-4">
+            <div class="col-auto">
+                <img src="{{ details.pfp }}" 
+                    alt="Profile Picture" 
+                    class="rounded-circle border" 
+                    style="width: 120px; height: 120px;">
+            </div>
+            <div class="col">
+                <h1 class="mb-2">@{{ details.username }}</h1>
+                <div class="d-flex flex-wrap gap-4 text-muted">
+                    <div>
+                        <span class="fs-5 fw-semibold text-dark">{{ count.posts }}</span> posts
+                    </div>
+                    <div>
+                        <span class="fs-5 fw-semibold text-dark">{{ count.followers }}</span> followers
+                    </div>
+                    <div>
+                        <span class="fs-5 fw-semibold text-dark">{{ count.following }}</span> following
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        {% if details.name %}
+            <h5>{{ details.name }}</h5>
+        {% endif %}
+        {% if details.bio %}
+            <div class="mb-3">
+                {{ details.bio }}
+            </div>
+        {% endif %}
+
+        {% if details.id == user_id %}
+            <div class="mb-3">
+                <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Edit Profile
+                </button>
+            </div>
+            <div class="collapse" id="collapseExample">
+                <form action="/profile/{{ details.username }}" method="post" novalidate>
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        <label class="form-label">name</label>
+                        {% if details.name %}
+                            {{ form.name(autocomplete="off", class="form-control w-auto", value=details.name) }}
+                        {% else %}
+                            {{ form.name(autocomplete="off", class="form-control w-auto") }}
+                        {% endif %}
+                        {% for error in form.name.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">bio</label>
+                        {{ form.bio(class="form-control", rows="3", maxlength=300) }}
+                        {% for error in form.bio.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <style>
+                        .avatar-option {
+                            position: relative;
+                            cursor: pointer;
+                            transition: transform 0.2s ease;
+                        }
+                        .avatar-option:hover {
+                            transform: scale(1.1);
+                        }
+                        .avatar-option img {
+                            width: 80px;
+                            height: 80px;
+                            border-radius: 50%;
+                            border: 3px solid transparent;
+                        }
+                        .avatar-option input:checked + label img {
+                            border-color: #28a745;
+                            box-shadow: 0 0 10px rgba(40, 167, 69, 0.6);
+                        }
+                        .avatar-option input:checked{
+                            display: block;
+                        }
+                    </style>
+
+                    <div class="container text-center">
+                        <h5 class="mb-4">Choose Your Avatar</h5>
+                        <div class="d-flex justify-content-center gap-3 flex-wrap">
+                            {% for i in range(1, 8) %}
+                            <div class="col-4 col-sm-2 avatar-option">
+                                <input type="radio" class="btn-check" name="pfp" id="pfp{{ i }}" value="/static/images/{{ i }}.jpg" autocomplete="off">
+                                <label for="pfp{{ i }}">
+                                    <img src="{{ url_for('static', filename='images/' ~ i ~ '.jpg') }}">
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        {{ form.submit(class="btn btn-success") }}
+                    </div>
+                </form>
+            </div>
+        {% else %}
+            <div class="mb-3">
+                <form action="/follow/{{ details.username }}" method="post">
+                    {{ follow_form.hidden_tag() }}
+                    {% if not follow_bool %}
+                        {{ follow_form.submit(value="Follow", class="btn btn-success") }}
+                    {% else %}
+                        {{ follow_form.submit(value="Unfollow", class="btn btn-success") }}
+                    {% endif %}
+                </form>
+            </div>
+        {% endif %}
+
+        <hr>
+
+        {% set path = '/profile/' ~ details.username %}
+        {% include 'posts.html' %}
+    </div>
+{% endblock %}
