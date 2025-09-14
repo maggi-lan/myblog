@@ -1,4 +1,5 @@
 # MyBlog
+### Video Demo: https://youtu.be/AfFE7ygUKRE
 #### Description:
 This project is a dynamic **CRUD-based** blog website. Users can create & delete their blog posts, customize their profile, follow or unfollow others and search for other users. The aim was to create a simple yet complete web application that demonstrates understanding of backend logic, templating engines, routing, user authentication, and frontend design.
 
