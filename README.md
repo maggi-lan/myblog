@@ -1,7 +1,9 @@
 # MyBlog
 ### Video Demo: https://youtu.be/AfFE7ygUKRE
 #### Description:
-This project is a dynamic **CRUD-based** blog website. Users can create & delete their blog posts, customize their profile, follow or unfollow others and search for other users. The aim was to create a simple yet complete web application that demonstrates understanding of backend logic, templating engines, routing, user authentication, and frontend design.
+This project is a dynamic **CRUD-based** blog website. Users can create & delete their blog posts, customize their profile, follow or unfollow others and search for other users. The aim was to create a simple web application that applies my understanding of backend logic, templating engines, routing, user authentication, and frontend design.
+
+**NOTE: This was designed to be deployed locally**
 
 ## Features
 - User Authentication
@@ -114,9 +116,6 @@ This contains the Jinja HTML templates and here is the list of templates:
 ## Design Decisions & Trade Offs
 ### Templating
  I didn't use the `posts.html` template to display search results despite requiring a very similar table structure because it doesn't display posts. This results in a small amount of repeated code. `posts.html` also combines the table and pagination which is another reason for this issue. Since this is a very small project, I didn't mind it but I will definitely keep in mind to not copy paste code.
-
-### CSS
-`styles.css` was mostly written by ChatGPT. I would like to mention that this is the only place where I have used AI to generate code because styling didn't feel like coding and I was too invested in implementing the backend logic. I still added a few of my own changes to the CSS at the end so it's not completely made by AI.
 
 ### Database
 I wanted to add a `DEFAULT` constraint (after creating the table) for the `pfp` column from `users` table but I couldn't alter the constraints of the table because of the limitations of sqlite. In the future I am thinking about switching to Postgres or MYSQL because they are scalable too. But since this was a very small scale project, I was okay with it.
